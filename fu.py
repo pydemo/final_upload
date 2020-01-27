@@ -56,33 +56,7 @@ def login(driver):
 	#//*[@id="react-root"]/div/div[2]/a[2
 	time.sleep(3)
 	driver.find_element_by_xpath("/html/body/div[2]/div/div/div[3]/button[2]").click()
-	
-	if 0:
-		while 1:
-			time.sleep(1)
-			print(1)
-			try:
-				driver.find_element_by_xpath("//*[@id='react-root']/section/main/div/button").click()
-				break
-			except:
-				pass
-		while 1:
-			time.sleep(1)
-			print(2)
-			try:
-				driver.find_element_by_xpath("/html/body/div[3]/div/div/div[3]/button[2]").click()
-				break
-			except:
-				pass
-		while 1:
-			time.sleep(1)
-			print(3)
-			driver.find_element_by_css_selector('body').send_keys(Keys.PAGE_DOWN)
-			try:
-				driver.find_element_by_xpath("/html/body/div[3]/div/div/div[3]/button[2]").click()
-				break
-			except:
-				pass
+
 def upload(driver,phototext, photopath):
 
 	driver.find_element_by_xpath("//div[@role='menuitem']").click()
@@ -107,9 +81,6 @@ def upload(driver,phototext, photopath):
 		else:
 			pass
 	time.sleep(1)
-	if 0:
-		driver.find_element_by_xpath("//*[@id='react-root']/section/div[2]/section[1]/div[2]/textarea").send_keys(phototext)
-		time.sleep(1)
 		
 	driver.find_element_by_xpath("//*[@id='react-root']/section/div[1]/header/div/div[2]/button").click()
 if __name__=="__main__":
