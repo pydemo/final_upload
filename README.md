@@ -17,3 +17,6 @@ uncomment line 37 to suppress browser window opening.
 ```Python
 #options.add_argument("--headless")
 ```
+
+
+[<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png">](https://www.buymeacoffee.com/0nJ32Xg)
