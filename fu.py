@@ -20,6 +20,12 @@ INSTA_PWD 	= os.environ.get('INSTA_PWD')
 assert INSTA_USER
 assert INSTA_PWD
 
+import traceback
+try:
+	import cStringIO
+except ImportError:
+	import io as cStringIO
+	
 
 if 1:
 	username = INSTA_USER.strip("'").strip('"')
@@ -51,12 +57,47 @@ def login(driver):
 	time.sleep(0.5)
 	driver.find_element_by_xpath("//*[@id='react-root']/section/main/article/div/div/div/form/div[7]/button/div").click()
 	time.sleep(3)
-	driver.find_element_by_xpath("//*[@id='react-root']/div/div[2]/a[2]").click()
+	save_login= None
+	try:
+		save_login = driver.find_element_by_xpath("//*[@id='react-root']/section/main/div/section/div/div[2]")
+		pp(dir(save_login))
+	except:
+		err_log = cStringIO.StringIO()
+		traceback.print_exc(file=err_log)
+		err = err_log.getvalue()
+		print(err)
+	if save_login:
+		sli = 'Save Your Login Info?'
+		if save_login.text == sli:
+			#Not now
+			 driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/button').click()
+		else:
+			raise Exception('Expecting "%s", got "%s".' % (sli, save_login.text))
+	#Add Instagram to your Home screen?
+	try:
+		#Cancel
+		time.sleep(2)
+		driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
+	except:
+		raise
+	try:
+		time.sleep(1)
+		driver.find_element_by_xpath("//*[@id='react-root']/div/div[2]/a[2]").click()
+	except:
+		err_log = cStringIO.StringIO()
+		traceback.print_exc(file=err_log)
+		err = err_log.getvalue()
+		print(err)
 	#driver.find_element_by_xpath("//*[@id='react-root']/section/main/article/div/div/div/form/div/div[2]/a[@title = 'Not Now']").click()
 	#//*[@id="react-root"]/div/div[2]/a[2
-	time.sleep(3)
-	driver.find_element_by_xpath("/html/body/div[2]/div/div/div[3]/button[2]").click()
-
+	try:
+		time.sleep(1)
+		driver.find_element_by_xpath("/html/body/div[2]/div/div/div[3]/button[2]").click()
+	except:
+		err_log = cStringIO.StringIO()
+		traceback.print_exc(file=err_log)
+		err = err_log.getvalue()
+		print(err)
 def upload(driver,phototext, photopath):
 
 	driver.find_element_by_xpath("//div[@role='menuitem']").click()
@@ -88,5 +129,17 @@ if __name__=="__main__":
 
 	photopath = os.path.join(home, r"images\DSC02225.JPG" )
 	upload(driver,phototext, photopath)
-	time.sleep(30)
+	
+	#Turn on notifications
+	try:
+		time.sleep(10)
+		#Not now
+		driver.find_element_by_xpath("/html/body/div[4]/div/div/div[3]/button[2]").click()
+	except:
+		err_log = cStringIO.StringIO()
+		traceback.print_exc(file=err_log)
+		err = err_log.getvalue()
+		print(err)
+	
+	
 	driver.close()
