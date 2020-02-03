@@ -1,4 +1,9 @@
-"python 3/ Windows OS"
+"""python 3/ Windows OS
+Usage:
+	set INSTA_USER='****@gmail.com'
+	set INSTA_PWD='***'
+	python fu.py
+"""
 import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import *
