@@ -37,7 +37,7 @@ if 1:
 	username = INSTA_USER.strip("'").strip('"')
 	passwd = INSTA_PWD.strip("'").strip('"')
 	
-driverpath = r".\driver\chromedriver.exe"
+driverpath = r".\driver\nt\chromedriver_79.exe"
 
 phototext = """
 #finalupload
@@ -85,7 +85,10 @@ def login(driver):
 		time.sleep(2)
 		driver.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 	except:
-		raise
+		err_log = cStringIO.StringIO()
+		traceback.print_exc(file=err_log)
+		err = err_log.getvalue()
+		print(err)
 	try:
 		time.sleep(1)
 		driver.find_element_by_xpath("//*[@id='react-root']/div/div[2]/a[2]").click()
@@ -138,9 +141,12 @@ if __name__=="__main__":
 	
 	#Turn on notifications
 	try:
-		time.sleep(10)
-		#Not now
+		
+		#Not now 
+		time.sleep(3)
 		driver.find_element_by_xpath("/html/body/div[4]/div/div/div[3]/button[2]").click()
+		time.sleep(10)
+		print('Done.')
 	except:
 		err_log = cStringIO.StringIO()
 		traceback.print_exc(file=err_log)
