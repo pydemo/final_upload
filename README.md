@@ -1,6 +1,7 @@
 # final_upload
 Upload image to instagram.
 
+Updated to chromedriver 86
 
 # Usage
 
