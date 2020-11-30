@@ -98,7 +98,35 @@ if __name__=="__main__":
         #swipe right
         time.sleep(1)
         while True:
+            try:    
+                print('Trying: "Upgrade Your Like"')
+                driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/button[2]/span').click()
+                print('Done.')
+            except:
+                print('Passing on "Upgrade Your Like".')
             try:
+                print('Trying: "Add Tinder to your Home Screen"')
+                driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/button[2]').click()
+                print('Done.')
+            except:
+                print('Passing on "Add Tinder to your Home Screen".')
+
+            try:
+                print('Trying: #say something nice')
+                add=[]
+                add.append('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+                add.append('//*[@id="modal-manager-canvas"]/div/div/div[1]/div/div[4]/button')
+                for aid, a in enumerate(add):
+                    try:
+                        driver.find_element_by_xpath(a).click()
+                        break
+                    except:
+                        print('Passing on %d' % aid)
+            except:
+                print('Passing on "say something nice".')
+                
+                        
+            try: #swipe right
                 driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/div[2]/div[4]/button').click()
                                               
             except:
@@ -107,23 +135,51 @@ if __name__=="__main__":
                                                   
                 except:
 
-                    try:
-                        driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/button[2]/span').click()
-                    except:
-                        print('Passing on "Upgrade Your Like".')
-                        try:
-                            driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/button[2]').click()
-                        except:
-                            print('Passing on "Add Tinder to your Home Screen".')
-                            secs = randrange(10) +1
-                            print('Restarting in', secs)
-                            time.sleep(randrange(10))
+                    if 1:
+                        go = input("Restart?")
+                        if go=='y':
+                            pass
+                        else:
+                            exit(1)
             secs = randrange(5,10) +randrange(2,10)
             print('Sleep for ', secs)
             time.sleep(secs)
             if 1: # get name
-                span=driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[3]/div/div[1]/div/div[1]/span')
-                print('Name:', span.text)
+                sp=[]
+                sp.append('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[4]/div/div[1]/div/div/span')
+                sp.append('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[3]/div/div[1]/div/div[1]/span')
+                for sid,s in enumerate(sp):
+                    try:
+                        span=driver.find_element_by_xpath(s)
+                        print('%d: Name: %s' %  (sid,span.text))
+                        break
+                    except:
+                        print("Passing on name: %d" % sid)
+            if 1: # get age
+                sp=[]
+                sp.append('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[3]/div/div[1]/div/span[2]')
+                
+                for sid,s in enumerate(sp):
+                    try:
+                        span=driver.find_element_by_xpath(s)
+                        print('%d: Age: %s' % (sid,span.text))
+                        break
+                    except:
+                        print("Passing on age: %d" % sid)
+                        
+            if 1: #inspect
+                b='//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[3]/button'
+                driver.find_element_by_xpath(b).click()
+                time.sleep(.5)
+                b='//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]'
+                country= driver.find_element_by_xpath(b)
+                print('Country:', country.text)
+                
+                if 1: #uninspect
+                    b='//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/div/div[1]/span/a'
+                    driver.find_element_by_xpath(b).click()
+                    
+            
             tid=2
             tabs={2:'//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div[2]/button[2]',
             3:'//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[1]/div[3]/div[1]/div[2]/button[3]',
