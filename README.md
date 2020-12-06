@@ -25,3 +25,7 @@ uncomment line 37 to suppress browser window opening.
 
 
 [<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png">](https://www.buymeacoffee.com/0nJ32Xg)
+
+
+
+Also: https://github.com/pydemo/tinder-swipe-automation-save-image
